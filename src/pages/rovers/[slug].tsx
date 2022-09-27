@@ -186,6 +186,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
   return {
     props: {
+      slug,
       Rover,
     },
   };

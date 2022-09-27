@@ -1,5 +1,5 @@
 import { MyUseContext } from "../../hooks/myUseContext";
-import { Container, Grid, Hover, Stats } from "./styles";
+import { Container, Grid, Hover } from "./styles";
 import Link from "next/link";
 
 export function Hovers() {
