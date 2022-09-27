@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.footer`
-  padding-top: 2rem;
+  padding-top: 4rem;
   padding-bottom: 2rem;
   display: flex;
   justify-content: flex-end;

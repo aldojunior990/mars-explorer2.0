@@ -1,20 +1,33 @@
 import axios from "axios";
-import { GetStaticPaths, GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { FormEvent, useEffect, useState } from "react";
 import { ImagesContent } from "../../components/imagesContent";
 import { Logo } from "../../components/logo";
 import { Pagination } from "../../components/pagination";
-import { Container, Image, Search } from "../../styles/rovers";
+import {
+  Container,
+  Search,
+  Image,
+  RoverDescription,
+} from "../../styles/rovers";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { getPrismicClient } from "../../services/prismic";
 
-interface HoverPageProps {
-  id: string;
+interface RoverPageProps {
+  slug: string;
   title: string;
   api_url: string;
+  img_url: string;
+  description: string;
+  start: string;
+  end: string;
+  link: string;
+  is_active: string;
 }
+
 interface ImagesProps {
   id: number;
   img_src: string;
@@ -27,18 +40,20 @@ interface GetProps {
 
 const LIMIT: number = 25;
 
-export default function Hovers({ hover }) {
-  const [value, setValue] = useState<string>();
+export default function Rovers({ Rover }) {
+  const [value, setValue] = useState<string>("");
   const [data, setData] = useState<ImagesProps[]>([]);
   const [total, setTotal] = useState<ImagesProps[]>([]);
   const [offset, setOffset] = useState<number>(0);
+
+  const [firstRequest, setFirstRequest] = useState<number>(0);
 
   async function handleNewSearch(event: FormEvent) {
     event.preventDefault();
 
     await axios
       .get<GetProps>(
-        `${hover.api_url}${value}&api_key=r9J5nknzQPaDpoja4sfglpb0SvITf9KlPPYgRQv4`
+        `${Rover.api_url}${value}&api_key=r9J5nknzQPaDpoja4sfglpb0SvITf9KlPPYgRQv4`
       )
       .then((Response) => {
         setTotal(Response.data.photos);
@@ -47,11 +62,14 @@ export default function Hovers({ hover }) {
         console.log(err);
       });
     setOffset(0);
+    setFirstRequest(1);
   }
 
   useEffect(() => {
-    if (total.length === 0) {
-      toast.error("Sem imagens nesta data");
+    if (firstRequest !== 0) {
+      if (total.length === 0) {
+        toast.error("Sem imagens nesta data");
+      }
     }
   }, [total]);
 
@@ -70,21 +88,41 @@ export default function Hovers({ hover }) {
   return (
     <>
       <Head>
-        <title>{hover.title}</title>
+        <title>{Rover.title}</title>
       </Head>
       <Container>
-        <ToastContainer className="toast" />
+        <ToastContainer />
         <header>
           <Logo />
           <Link href="/">
             <a>voltar</a>
           </Link>
         </header>
+
         <Image
-          src="/rover.jpg"
+          src={Rover.img_url}
           alt="Imagem de um rover explorando a superficie de Marte"
         />
-        <h2>Rover {hover.title}</h2>
+
+        <h2>Rover {Rover.title}</h2>
+
+        <RoverDescription>
+          <section>
+            <p>
+              Inicio da missão: <b>{Rover.start}</b>
+            </p>
+            {Rover.is_active === "true" && (
+              <p>
+                Atualmente: <b>{Rover.end}</b>
+              </p>
+            )}
+            {Rover.is_active === "false" && (
+              <p>
+                Fim: <b>{Rover.end}</b>
+              </p>
+            )}
+          </section>
+        </RoverDescription>
 
         <Search>
           <form onSubmit={handleNewSearch}>
@@ -118,67 +156,37 @@ export default function Hovers({ hover }) {
   );
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const HoverPages: HoverPageProps[] = [
-    {
-      id: "spirit",
-      title: "Spirit",
-      api_url:
-        "https://api.nasa.gov/mars-photos/api/v1/rovers/spirit/photos?earth_date=",
-    },
-    {
-      id: "opportunity",
-      title: "Opportunity",
-      api_url:
-        "https://api.nasa.gov/mars-photos/api/v1/rovers/opportunity/photos?earth_date=",
-    },
-    {
-      id: "curiosity",
-      title: "Curiosity",
-      api_url:
-        "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=",
-    },
-  ];
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  const { slug } = params;
 
-  const paths = HoverPages.map((h) => {
-    return { params: { slug: h.id } };
-  });
+  const prismic = getPrismicClient();
 
-  return {
-    paths,
-    fallback: false,
+  const response = await prismic.getByUID<any>("rover", String(slug), {});
+
+  if (!response) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  const Rover: RoverPageProps = {
+    slug: response.uid,
+    api_url: response.data.api_url,
+    description: response.data.description,
+    start: response.data.start,
+    end: response.data.end,
+    img_url: response.data.img_url,
+    link: response.data.link,
+    title: response.data.title,
+    is_active: response.data.is_active,
   };
-};
-
-export const getStaticProps: GetStaticProps = async (context) => {
-  const { slug } = context.params;
-
-  const HoverPages: HoverPageProps[] = [
-    {
-      id: "spirit",
-      title: "Spirit",
-      api_url:
-        "https://api.nasa.gov/mars-photos/api/v1/rovers/spirit/photos?earth_date=",
-    },
-    {
-      id: "opportunity",
-      title: "Opportunity",
-      api_url:
-        "https://api.nasa.gov/mars-photos/api/v1/rovers/opportunity/photos?earth_date=",
-    },
-    {
-      id: "curiosity",
-      title: "Curiosity",
-      api_url:
-        "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=",
-    },
-  ];
-
-  const data: HoverPageProps = HoverPages.find((h) => h.id === slug);
 
   return {
     props: {
-      hover: data,
+      Rover,
     },
   };
 };

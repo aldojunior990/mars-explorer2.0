@@ -3,8 +3,6 @@ import styled from "styled-components";
 export const Container = styled.ul`
   list-style: none;
   display: flex;
-  padding-top: 3rem;
-  padding-bottom: 3rem;
 
   li {
     color: var(--white);
@@ -44,5 +42,11 @@ export const Container = styled.ul`
         background-color: var(--black-200);
       }
     }
+  }
+
+  @media (max-width: 1184px) {
+    width: 100%;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
 `;

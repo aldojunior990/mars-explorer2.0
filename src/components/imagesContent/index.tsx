@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Container, Image } from "./styles";
 
 interface ImagesProps {
@@ -15,11 +16,11 @@ export function ImagesContent({ imgs }: ContentProps) {
     <Container>
       {imgs?.map((i) => {
         return (
-          <Image
-            key={i.id}
-            src={i.img_src}
-            alt={`Imagem do dia: ` + i.earth_date}
-          />
+          <Link key={i.id} href={i.img_src}>
+            <a>
+              <Image src={i.img_src} alt={`Imagem do dia: ` + i.earth_date} />
+            </a>
+          </Link>
         );
       })}
     </Container>

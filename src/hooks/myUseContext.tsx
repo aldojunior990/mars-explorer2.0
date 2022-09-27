@@ -12,14 +12,6 @@ interface ImagesProps {
   earth_date: string;
 }
 
-interface RecentViewsProps {
-  id: number;
-  rover_name: string;
-  search_date: string;
-  date: string;
-  to: string;
-}
-
 interface HoverProps {
   id: number;
   name: string;
@@ -31,10 +23,12 @@ interface HoverProps {
 
 interface ContextData {
   hovers: HoverProps[];
-  recents: RecentViewsProps[];
+
   setRequest: (request: RequestProps) => void;
   data: ImagesProps[];
-  setRecents: (recents: RecentViewsProps[]) => void;
+
+  mostRecent: string;
+  setMostRecent: (mostRecent: string) => void;
 }
 
 interface ContextProviderProps {
@@ -44,11 +38,11 @@ interface ContextProviderProps {
 export const Context = createContext<ContextData>({} as ContextData);
 
 export function ContextProvider({ children }: ContextProviderProps) {
-  const [recents, setRecents] = useState<RecentViewsProps[]>([]);
   const [request, setRequest] = useState<RequestProps>({
     name: "",
     request: "",
   });
+  const [mostRecent, setMostRecent] = useState<string>("");
 
   const { data } = MyUseQuery<ImagesProps[]>(request.name, request.request);
 
@@ -80,10 +74,28 @@ export function ContextProvider({ children }: ContextProviderProps) {
       launch: "26 de nov de 2011",
       mission: "em andamento",
     },
+
+    {
+      id: 3,
+      name: "Perseverance",
+      description:
+        "O Mars 2020 Perseverance Rover procura sinais de vida microbiana antiga, o que avançará a busca da NASA para explorar a habitabilidade passada de Marte.",
+      to: "/rovers/perseverance",
+      launch: "26 de nov de 2011",
+      mission: "em andamento",
+    },
   ];
 
   return (
-    <Context.Provider value={{ hovers, recents, setRequest, data, setRecents }}>
+    <Context.Provider
+      value={{
+        hovers,
+        setRequest,
+        data,
+        mostRecent,
+        setMostRecent,
+      }}
+    >
       {children}
     </Context.Provider>
   );

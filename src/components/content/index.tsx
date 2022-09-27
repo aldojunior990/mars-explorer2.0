@@ -13,7 +13,7 @@ export function Content() {
 
           <p>
             Encontre incriveis imagens da superficie de Marte registradas pelos
-            rovers Spirit, Opportunity e Curiosity.
+            rovers Spirit, Opportunity, Curiosity e Perseverance.
           </p>
         </Description>
       </header>

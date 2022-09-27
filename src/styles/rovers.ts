@@ -6,9 +6,6 @@ export const Container = styled.main`
   width: 100%;
   background-color: var(--black);
   width: 100%;
-  .toast {
-    color: var(--black-200);
-  }
   header {
     display: flex;
     align-items: center;
@@ -69,10 +66,11 @@ export const Image = styled.img`
   object-fit: cover;
   width: 100%;
   border-radius: 0.5rem;
-  height: 10rem;
+  height: 6rem;
 `;
 
 export const Search = styled.nav`
+  display: flex;
   margin-top: 2rem;
   align-items: center;
   form {
@@ -108,6 +106,11 @@ export const Search = styled.nav`
     }
   }
 
+  @media (max-width: 1184px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   @media (max-width: 768px) {
     form {
       input {
@@ -115,6 +118,35 @@ export const Search = styled.nav`
       }
       input:last-child {
         width: 40%;
+      }
+    }
+  }
+`;
+
+export const RoverDescription = styled.section`
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: var(--black-200);
+  border-radius: 0.5rem;
+
+  div {
+    b {
+      color: var(--orange);
+    }
+    p:last-child {
+      font-weight: 400;
+      color: var(--white);
+    }
+  }
+
+  section {
+    p {
+      line-height: 2rem;
+      color: var(--orange);
+      font-weight: 600;
+      b {
+        color: var(--white);
+        font-weight: 400;
       }
     }
   }
