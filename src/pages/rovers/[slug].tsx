@@ -17,7 +17,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { getPrismicClient } from "../../services/prismic";
 
 interface RoverPageProps {
-  slug: string;
+  id: string;
   title: string;
   api_url: string;
   img_url: string;
@@ -172,8 +172,9 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     };
   }
 
-  const Rover: RoverPageProps = {
-    slug: response.uid,
+  const Rover = {
+    slug,
+    id: response.uid,
     api_url: response.data.api_url,
     description: response.data.description,
     start: response.data.start,
@@ -186,7 +187,6 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
   return {
     props: {
-      slug,
       Rover,
     },
   };
