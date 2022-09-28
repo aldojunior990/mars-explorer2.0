@@ -47,7 +47,7 @@ export function ContextProvider({ children }: ContextProviderProps) {
       id: 0,
       name: "spirit",
       description:
-        "Spirit encontrou evidências de que Marte já foi muito mais úmido do que é hoje e ajudou os cientistas a entender melhor o ventomarciano.",
+        "Spirit encontrou evidências de que Marte já foi muito mais úmido do que é hoje e ajudou os cientistas a entender melhor o vento marciano.",
       to: "rovers/spirit",
       launch: "10 de jun de 2003",
       mission: "completa",
@@ -56,7 +56,7 @@ export function ContextProvider({ children }: ContextProviderProps) {
       id: 1,
       name: "Opportunity",
       description:
-        "O Opportunity foi o segundo dos dois rovers lançados em 2003 a pousar em Marte e começar a atravessar o Planeta Vermelho em busca de sinais de água antiga.",
+        "O Opportunity foi o segundo rover a pousar em Marte. Ao longo dos anos ele atravessou o planeta vermelho em busca de sinais de água.",
       to: "rovers/opportunity",
       launch: "7 de jul de 2003",
       mission: "completa",
@@ -65,7 +65,7 @@ export function ContextProvider({ children }: ContextProviderProps) {
       id: 2,
       name: "Curiosity",
       description:
-        "A missão do Curiosity é determinar se o Planeta Vermelho já foi habitável à vida microbiana..",
+        "A missão do Curiosity é determinar se o planeta vermelho já foi habitado por vida microbiana..",
       to: "rovers/curiosity",
       launch: "26 de nov de 2011",
       mission: "em andamento",
@@ -75,7 +75,7 @@ export function ContextProvider({ children }: ContextProviderProps) {
       id: 3,
       name: "Perseverance",
       description:
-        "O Mars 2020 Perseverance Rover procura sinais de vida microbiana antiga, o que avançará a busca da NASA para explorar a habitabilidade passada de Marte.",
+        "O Perseverance procura sinais de vida microbiana, o que fará NASA avançar com a exploração da possivel existencia de vida em Marte.",
       to: "rovers/perseverance",
       launch: "26 de nov de 2011",
       mission: "em andamento",
