@@ -75,6 +75,11 @@ export const Search = styled.nav`
   align-items: center;
   form {
     width: 100%;
+    input[type="date"]::-webkit-inner-spin-button,
+    input[type="date"]::-webkit-calendar-picker-indicator {
+      display: none;
+      -webkit-appearance: none;
+    }
     input {
       height: 3rem;
       border-radius: 0.3rem 0rem 0rem 0.3rem;
