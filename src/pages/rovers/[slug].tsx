@@ -20,7 +20,6 @@ interface RoverPageProps {
   id: string;
   title: string;
   api_url: string;
-  img_url: string;
   description: string;
   start: string;
   end: string;
@@ -100,7 +99,7 @@ export default function Rovers({ Rover }) {
         </header>
 
         <Image
-          src={Rover.img_url}
+          src="/rover.jpg"
           alt="Imagem de um rover explorando a superficie de Marte"
         />
 
@@ -188,7 +187,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     description: response.data.description,
     start: response.data.start,
     end: response.data.end,
-    img_url: response.data.img_url,
     link: response.data.link,
     title: response.data.title,
     is_active: response.data.is_active,
@@ -198,6 +196,5 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     props: {
       Rover,
     },
-    revalidate: 60 * 60 * 24,
   };
 };
