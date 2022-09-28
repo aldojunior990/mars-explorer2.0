@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.ul`
   list-style: none;
   display: flex;
-
+  justify-content: space-between;
   li {
     color: var(--white);
     & + li {
@@ -22,7 +22,7 @@ export const Container = styled.ul`
   }
 
   .mid-buttons {
-    width: 2.5rem;
+    flex: 1;
     button {
       &:hover {
         border: 1px solid var(--orange);
@@ -35,7 +35,8 @@ export const Container = styled.ul`
   }
 
   .side-buttons {
-    width: 6rem;
+    min-width: 6rem;
+    flex: 1;
     button {
       background-color: var(--orange);
       &:disabled {
