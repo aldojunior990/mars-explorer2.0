@@ -49,18 +49,20 @@ export const Hover = styled.div`
     }
   }
 
-  button {
+  a {
     margin-top: 2rem;
-    background-color: var(--green);
-    border: 0px;
-    width: 100%;
-    border-radius: 0.3rem;
-    height: 2rem;
-    color: var(--black);
-    font-weight: 700;
-    transition: 0.5s;
-    &:hover {
-      background-color: var(--white);
+    button {
+      background-color: var(--green);
+      border: 0px;
+      width: 100%;
+      border-radius: 0.3rem;
+      height: 2rem;
+      color: var(--black);
+      font-weight: 700;
+      transition: 0.5s;
+      &:hover {
+        background-color: var(--white);
+      }
     }
   }
 `;
