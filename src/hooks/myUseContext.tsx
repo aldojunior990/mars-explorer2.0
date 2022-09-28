@@ -52,7 +52,7 @@ export function ContextProvider({ children }: ContextProviderProps) {
       name: "spirit",
       description:
         "Spirit encontrou evidências de que Marte já foi muito mais úmido do que é hoje e ajudou os cientistas a entender melhor o ventomarciano.",
-      to: "/rovers/spirit",
+      to: "rovers/spirit",
       launch: "10 de jun de 2003",
       mission: "completa",
     },
@@ -61,7 +61,7 @@ export function ContextProvider({ children }: ContextProviderProps) {
       name: "Opportunity",
       description:
         "O Opportunity foi o segundo dos dois rovers lançados em 2003 a pousar em Marte e começar a atravessar o Planeta Vermelho em busca de sinais de água antiga.",
-      to: "/rovers/opportunity",
+      to: "rovers/opportunity",
       launch: "7 de jul de 2003",
       mission: "completa",
     },
@@ -70,7 +70,7 @@ export function ContextProvider({ children }: ContextProviderProps) {
       name: "Curiosity",
       description:
         "A missão do Curiosity é determinar se o Planeta Vermelho já foi habitável à vida microbiana..",
-      to: "/rovers/curiosity",
+      to: "rovers/curiosity",
       launch: "26 de nov de 2011",
       mission: "em andamento",
     },
@@ -80,7 +80,7 @@ export function ContextProvider({ children }: ContextProviderProps) {
       name: "Perseverance",
       description:
         "O Mars 2020 Perseverance Rover procura sinais de vida microbiana antiga, o que avançará a busca da NASA para explorar a habitabilidade passada de Marte.",
-      to: "/rovers/perseverance",
+      to: "rovers/perseverance",
       launch: "26 de nov de 2011",
       mission: "em andamento",
     },

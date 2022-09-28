@@ -198,6 +198,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     props: {
       Rover,
     },
-    revalidate: 86400,
+    revalidate: 60 * 60 * 24,
   };
 };
