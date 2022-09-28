@@ -39,9 +39,9 @@ interface GetProps {
 
 const LIMIT: number = 25;
 
-export default function Rovers({ Rover }) {
+export default function Rovers({ Rover, api }) {
   const [value, setValue] = useState<string>("");
-  const [data, setData] = useState<ImagesProps[]>([]);
+  const [images, setimages] = useState<ImagesProps[]>([]);
   const [total, setTotal] = useState<ImagesProps[]>([]);
   const [offset, setOffset] = useState<number>(0);
 
@@ -51,9 +51,7 @@ export default function Rovers({ Rover }) {
     event.preventDefault();
 
     await axios
-      .get<GetProps>(
-        `${Rover.api_url}${value}&api_key=r9J5nknzQPaDpoja4sfglpb0SvITf9KlPPYgRQv4`
-      )
+      .get<GetProps>(`${Rover.api_url}${value}&api_key=${api}`)
       .then((Response) => {
         setTotal(Response.data.photos);
       })
@@ -74,7 +72,7 @@ export default function Rovers({ Rover }) {
 
   useEffect(() => {
     var arr = total.slice(offset, offset + LIMIT);
-    setData(arr);
+    setimages(arr);
   }, [total, offset]);
 
   function handleToTop() {
@@ -143,7 +141,7 @@ export default function Rovers({ Rover }) {
         </Search>
         {total?.length > 0 && (
           <>
-            <ImagesContent imgs={data} />
+            <ImagesContent imgs={images} />
 
             <button className="btn_top" onClick={() => handleToTop()}>
               voltar ao topo
@@ -175,6 +173,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const api: string = process.env.API_KEY;
+
   const { slug } = params;
 
   const prismic = getPrismicClient();
@@ -195,6 +195,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   return {
     props: {
       Rover,
+      api,
     },
   };
 };

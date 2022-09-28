@@ -1,5 +1,4 @@
 import { createContext, ReactNode, useContext, useState } from "react";
-import { MyUseQuery } from "./MyUseQuery";
 
 interface RequestProps {
   name: string;
@@ -25,7 +24,6 @@ interface ContextData {
   hovers: HoverProps[];
 
   setRequest: (request: RequestProps) => void;
-  data: ImagesProps[];
 
   mostRecent: string;
   setMostRecent: (mostRecent: string) => void;
@@ -43,8 +41,6 @@ export function ContextProvider({ children }: ContextProviderProps) {
     request: "",
   });
   const [mostRecent, setMostRecent] = useState<string>("");
-
-  const { data } = MyUseQuery<ImagesProps[]>(request.name, request.request);
 
   const hovers: HoverProps[] = [
     {
@@ -91,7 +87,6 @@ export function ContextProvider({ children }: ContextProviderProps) {
       value={{
         hovers,
         setRequest,
-        data,
         mostRecent,
         setMostRecent,
       }}
