@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GetServerSideProps } from "next";
+import { GetServerSideProps, GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { FormEvent, useEffect, useState } from "react";
@@ -156,7 +156,26 @@ export default function Rovers({ Rover }) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+export const getStaticPaths: GetStaticPaths = async () => {
+  const prismic = getPrismicClient();
+
+  const rovers = await prismic.get();
+
+  const paths = rovers.results.map((r) => {
+    return {
+      params: {
+        slug: r.uid,
+      },
+    };
+  });
+
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { slug } = params;
 
   const prismic = getPrismicClient();
@@ -179,5 +198,6 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     props: {
       Rover,
     },
+    revalidate: 86400,
   };
 };
