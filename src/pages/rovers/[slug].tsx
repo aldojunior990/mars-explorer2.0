@@ -163,17 +163,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
   const response = await prismic.getByUID<any>("rover", String(slug), {});
 
-  if (!response) {
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    };
-  }
-
   const Rover = {
-    slug,
     id: response.uid,
     api_url: response.data.api_url,
     description: response.data.description,
