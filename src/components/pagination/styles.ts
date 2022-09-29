@@ -22,6 +22,7 @@ export const Container = styled.ul`
   }
 
   .mid-buttons {
+    width: 2rem;
     flex: 1;
     button {
       &:hover {
@@ -35,7 +36,7 @@ export const Container = styled.ul`
   }
 
   .side-buttons {
-    min-width: 6rem;
+    min-width: 5rem;
     flex: 1;
     button {
       background-color: var(--orange);
