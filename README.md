@@ -9,6 +9,9 @@ Esta aplicação utiliza a api da nasa para buscar e exibir imagens registradas 
 
 This app uses the NASA search API for images recorded by Martian Rovers.
 
+<h1 align="center" display="flex">
+   <img height="500px" src=".github/logo.png">
+</h1>
 
 <h1 align="center" display="flex">
    <img height="500px" src=".github/tela1.png">
